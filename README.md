@@ -10,7 +10,6 @@ Send one request shape to `/v1/chat/completions` and route it to **OpenAI, Anthr
   <img alt="SQLAlchemy" src="https://img.shields.io/badge/SQLAlchemy-2.0%20async-D71F00?logo=sqlite&logoColor=white">
   <img alt="Redis" src="https://img.shields.io/badge/Redis-rate%20limiting-DC382D?logo=redis&logoColor=white">
   <img alt="Docker" src="https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white">
-  <img alt="Tests" src="https://img.shields.io/badge/tests-104%20passing-brightgreen?logo=pytest&logoColor=white">
 </p>
 
 ---
@@ -25,7 +24,6 @@ Send one request shape to `/v1/chat/completions` and route it to **OpenAI, Anthr
 | **Resilience** | Configurable per-request fallback chains across providers |
 | **Persistence** | Async SQLAlchemy + Alembic migrations (SQLite → Postgres-ready) |
 | **Rate limiting** | Redis fixed-window, per API key, fails open |
-| **Testing** | 104 tests, fully mocked/in-memory — no live network in CI |
 | **Deployment** | Docker + docker-compose, migrations run on container start |
 
 ## ✨ Features
@@ -170,14 +168,6 @@ If `fallback` is omitted, the gateway falls back to `DEFAULT_FALLBACK_CHAIN` fro
 curl http://localhost:8000/v1/models -H "X-API-Key: $API_KEY"
 curl http://localhost:8000/v1/health/providers -H "X-API-Key: $API_KEY"
 ```
-
-## ✅ Testing
-
-```bash
-pytest
-```
-
-104 tests, no live network, Redis, or on-disk provider calls in the suite — providers are mocked, Redis is `fakeredis`, and the DB is a dedicated on-disk SQLite test file seeded with one API key (see `tests/conftest.py`).
 
 ## 🧠 Engineering decisions
 

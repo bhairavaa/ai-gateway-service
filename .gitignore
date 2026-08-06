@@ -157,6 +157,10 @@ ENV/
 env.bak/
 venv.bak/
 
+# App-local SQLite data directory (mounted as a docker volume in prod)
+/data/
+*.db
+
 # Spyder project settings
 .spyderproject
 .spyproject

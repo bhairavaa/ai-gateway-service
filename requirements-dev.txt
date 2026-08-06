@@ -1,0 +1,11 @@
+-r requirements.txt
+
+pytest==9.1.1
+pytest-asyncio==1.4.0
+pytest-cov==7.1.0
+fakeredis==2.36.2
+ruff==0.15.22
+
+# starlette.testclient now prefers this transport over raw httpx (TestClient only — the
+# app's own runtime HTTP calls in the provider adapters still use httpx directly).
+httpx2==2.7.0

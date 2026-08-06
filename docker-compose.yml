@@ -1,0 +1,29 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  gateway:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      # Override the localhost defaults from .env so the app reaches the other containers by service name.
+      REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: sqlite+aiosqlite:///./data/gateway.db
+    volumes:
+      - gateway-data:/app/data
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  gateway-data:
